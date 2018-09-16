@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost/importxml');
 
 // models
 require("./models/Channel");
+require("./models/Item");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

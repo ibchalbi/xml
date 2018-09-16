@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+const Item = require('../models/Item');
 var Schema = mongoose.Schema;
 
 var channelSchema = new Schema({
@@ -7,17 +7,7 @@ var channelSchema = new Schema({
   link: String,
   description: String,
   language: String,
-  pubDate: String,
-  items: 
-    [{
-      title: String,
-      link: String,
-      category: String,
-      pubDate: String,
-      description: String,
-      enclosure: String,
-      author: String,
-      guid: String
-    }]
+  pubDate: Date,
+  items: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
 });
 module.exports = mongoose.model('Channel', channelSchema);
