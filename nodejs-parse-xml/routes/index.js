@@ -1,11 +1,11 @@
 var express = require("express");
 var router = express.Router();
+
 var fs = require("fs");
 var xml2js = require("xml2js");
 var parser = new xml2js.Parser();
 
 var mongoose = require("mongoose");
-
 var Channel = mongoose.model("Channel");
 var Item = mongoose.model("Item");
 
@@ -32,8 +32,11 @@ router.get("/", function(req, res, next) {
           pubDate: channel[0].pubDate
         });
         // items
-        channel[0].item.forEach(it => {
         
+        
+        if(channel[0].item!=null){
+          xmlchannel.valid=true;
+        channel[0].item.forEach(it => {
           xmlitems = new Item({
             title: it.title,
             link: it.link,
@@ -49,33 +52,39 @@ router.get("/", function(req, res, next) {
             channel: xmlchannel._id,
             category: it.category
           });
-
+         
           // saving the items
-          var lastThree = (xmlitems.enclosure.url).substr((xmlitems.enclosure.url).length - 3);
-      if (lastThree === "mp3" || lastThree === "mp4") {
-          xmlitems.valid=true;
-       
-      }
-      else 
-           {
-            xmlitems.valid=false;
-            xmlitems.enclosure.url=null;
-           }
-           Item.collection.insert(xmlitems,function(err, doc) {
+          /* testing the url */
+          var lastFour = xmlitems.enclosure.url.substr(
+            xmlitems.enclosure.url.length - 4
+          );
+          if (
+            lastFour === ".mp3" ||
+            lastFour === ".mp4" ||
+            lastFour === ".wmv" ||
+            lastFour === ".wmv"
+          ) {
+            xmlitems.valid = true;
+          } else {
+            xmlitems.valid = false;
+            xmlitems.enclosure.url = null;
+            console.log("this item does not have a valid url");
+          }
+          Item.collection.insert(xmlitems, function(err, doc) {
             if (err) {
               console.log("err trying to save an item!");
               return;
             } else {
-              
               console.log("Done saving the items!");
-               
             }
           });
-         
-         
-         
+        });
+      } else {
         
-      }); 
+        xmlchannel.valid=false;
+          console.log("channel should have at least one item");
+        
+      }
         xmlchannel.save(function(err) {
           if (!err) {
             res.send("Done saving the channel!");
@@ -89,13 +98,4 @@ router.get("/", function(req, res, next) {
   });
 });
 
-//get channel by id
-router.get("/channel/:id", function(req, res, next) {
-  Channel.findOne({ _id: req.params.id })
-    .populate("items")
-    .exec(function(err, channel) {
-      if (err) return handleError(err);
-      res.send(channel);
-    });
-});
 module.exports = router;

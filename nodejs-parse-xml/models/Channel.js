@@ -3,10 +3,11 @@ const Item = require('./Item');
 var Schema = mongoose.Schema;
 
 var channelSchema = new Schema({
-  title: String,
+  title: {type:String, required:true},
   link: String,
   description: String,
   language: String,
-  pubDate: Date
+  pubDate: {type:Date,default:new Date(), required:true},
+  valid: boolean
 });
 module.exports = mongoose.model('Channel', channelSchema);

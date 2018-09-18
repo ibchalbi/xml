@@ -23,14 +23,4 @@ var itemSchema = new Schema({
 });
 
 module.exports = mongoose.model('Item', itemSchema);
-/*
-itemSchema.path('enclosure.url').validate(function(url) {
-     
-      var lastThree = url.substr(url.length - 3);
-      if (lastThree === "mp3" || lastThree === "mp4") {
-            return true;
-      }
-      else 
-            return false;
-  }, 'Invalid url');
-  */
+
