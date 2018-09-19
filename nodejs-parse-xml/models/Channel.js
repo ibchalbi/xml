@@ -8,6 +8,6 @@ var channelSchema = new Schema({
   description: String,
   language: String,
   pubDate: {type:Date,default:new Date(), required:true},
-  valid: boolean
+  valid:Boolean
 });
 module.exports = mongoose.model('Channel', channelSchema);

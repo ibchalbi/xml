@@ -8,7 +8,7 @@ var itemSchema = new Schema({
       title: String,
       link: String,
       category: String,
-      pubDate: {type:Date,default:new Date(), required:true},
+      pubDate: Date,
       description: String,
       enclosure:  {
             url: { type: mongoose.SchemaTypes.Url },
@@ -18,7 +18,11 @@ var itemSchema = new Schema({
       author: String,
       guid: String,
       channel : { type: Schema.Types.ObjectId, ref: 'Channel' },
-      valid: Boolean
+      valid:[{
+            isValid:{type:Boolean,default:true},
+            code :Number,
+            msg:String
+      }]
     
 });
 

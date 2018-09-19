@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-
+const urlExists = require("url-exists");
 var fs = require("fs");
 var xml2js = require("xml2js");
 var parser = new xml2js.Parser();
@@ -36,7 +36,9 @@ router.get("/", function(req, res, next) {
         
         if(channel[0].item!=null){
           xmlchannel.valid=true;
+
         channel[0].item.forEach(it => {
+          console.log(it)
           xmlitems = new Item({
             title: it.title,
             link: it.link,
@@ -53,22 +55,46 @@ router.get("/", function(req, res, next) {
             category: it.category
           });
          
-          // saving the items
-          /* testing the url */
-          var lastFour = xmlitems.enclosure.url.substr(
-            xmlitems.enclosure.url.length - 4
-          );
-          if (
-            lastFour === ".mp3" ||
-            lastFour === ".mp4" ||
-            lastFour === ".wmv" ||
-            lastFour === ".wmv"
-          ) {
-            xmlitems.valid = true;
+         
+          // saving the item
+          // testing the url 
+          if (xmlitems.enclosure.url === "/") {
+            valid={isValid:false,code:'11',msg:"the URL in this item is empty"}
+            xmlitems.valid.push(valid);
           } else {
-            xmlitems.valid = false;
-            xmlitems.enclosure.url = null;
-            console.log("this item does not have a valid url");
+            var lastFour = xmlitems.enclosure.url.substr(
+              xmlitems.enclosure.url.length - 4
+            );
+            if (
+              lastFour === ".mp3" ||
+              lastFour === ".mp4" ||
+              lastFour === ".wmv" ||
+              lastFour === ".wmv"
+            ) {
+              urlExists(xmlitems.enclosure.url, function(err, exists) {
+                if (!exists) {
+                  valid={isValid:false,code:'12',msg:"the URL in this item is not valid"}
+                  xmlitems.valid.push(valid);
+                }
+              });
+            } else {
+              valid={isValid:false,code:'13',msg:"the URL in this item does not provide an audio or video"}
+              xmlitems.valid.push(valid);
+              console.log("the URL in this item does not provide an audio or video");
+            }
+        }
+        
+          //testing the date
+          if (xmlitems.pubDate == null) {
+            valid={isValid:false,code:'21',msg:"pubDate: does not exsist"}
+            xmlitems.valid.push(valid);
+            xmlitems.pubDate = new Date();
+            console.log("pubDate: does not exsist");
+          } else if (!(xmlitems.pubDate instanceof Date)) {
+            valid={isValid:false,code:'22',msg:"pubDate: wrong date format"}
+            xmlitems.valid.push(valid);
+            xmlitems.pubDate = new Date();
+            console.log("pubDate: wrong date format");
           }
           Item.collection.insert(xmlitems, function(err, doc) {
             if (err) {
@@ -82,7 +108,7 @@ router.get("/", function(req, res, next) {
       } else {
         
         xmlchannel.valid=false;
-          console.log("channel should have at least one item");
+        console.log("channel should have at least one item");
         
       }
         xmlchannel.save(function(err) {
