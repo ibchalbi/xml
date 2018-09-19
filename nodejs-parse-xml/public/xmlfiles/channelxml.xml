@@ -4,7 +4,7 @@
     xmlns:content="http://purl.org/rss/1.0/modules/content/"
     xmlns:wfw="http://wellformedweb.org/CommentAPI/">
     <channel>
-        <title>RTBF sport - Homepage</title>
+        <title>Xml file</title>
         <link>http://www.rtbf.be/sport</link>
         <description>
             <![CDATA[Homepage Sport]]>
@@ -15,7 +15,7 @@
             <title>Mikkelsen le plus habile en Turquie, Neuville repousse Ogier (LIVE)</title>
             <link>https://www.rtbf.be/sport/moteurs/rallye/wrc/detail_wrc-turquie-le-fil-info-du-vendredi-live-7h?id=10018602</link>
             <category>MOTEURS</category>
-            <pubDate>Fri, 14 Sep 2018 12:36:43 +0200</pubDate>
+            <pubDate></pubDate>
             <description>
                 <![CDATA[<img src="http://ds.static.rtbf.be/article/image/770x433/2/c/c/8a878be9d1e7fba516967f3725fd8b92-1536909590.png"/>Le programme de vendredi
 
@@ -62,7 +62,7 @@ ES7 : Ciçekli 2 (12.57 km - 15h03)]]>
             <description>
                 <![CDATA[<img src="http://ds.static.rtbf.be/article/image/770x433/7/c/e/6ed6c32b798616e3461804fdbe263b1f-1536786364.jpg"/>Ce dimanche, le circuit urbain de Marina Bay accueillera le Grand Prix de Singapour. Cette épreuve, la 14e du championnat du monde, est considérée comme l'une des plus exigeantes de la saison avec ses 61 tours qui demandent beaucoup d'énergie et de...]]>
             </description>
-            <enclosure url="http://ds.static.rtbf.be/article/image/770x433/7/c/e/6ed6c32b798616e3461804fdbe263b1f-1536786364.jpg"  length="1"  type="image/jpg"  />
+            <enclosure url="http://ds.static.rtbf.be/article/image/770x433/7/c/e/6ed6c32b798616e3461804fdbe263b1f-1536786364.mp3"  length="1"  type="image/jpg"  />
             <author>Roger Gatsinzi</author>
             <guid>https://www.rtbf.be/sport/moteurs/f1/detail_le-gp-de-singapour-un-circuit-au-charme-particulier?id=10015485</guid>
         </item>
@@ -117,15 +117,14 @@ ES7 : Ciçekli 2 (12.57 km - 15h03)]]>
             <guid>https://www.rtbf.be/sport/autres/natation/detail_tous-les-belges-en-finale-a-doha-meilleur-temps-pour-timmers?id=10018918</guid>
         </item>
         <item>
-            <title>Suivez le Championnat des Flandres en direct vid&#233;o (LIVE 15h30)</title>
-            <link>https://www.rtbf.be/sport/cyclisme/detail_suivez-le-championnat-des-flandres-en-direct-video-live-15h30?id=10018155</link>
-            <category>CYCLISME</category>
+            <title></title>
+             <category>CYCLISME</category>
             <pubDate>Fri, 14 Sep 2018 07:00:00 +0200</pubDate>
             <description>
                 <![CDATA[<img src="http://ds.static.rtbf.be/article/image/770x433/a/0/7/654ed85191dcfd746503f21c0ad1ef3d-1536839411.jpg"/>La 103e édition du championnat des Flandres (1.1), septième manche de la Napoleon Games Cycling Cup, se déroule vendredi à Koolskamp. Quatre équipes du WorldTour seulement seront au départ: LottoNL-Jumbo, Trek-Segafredo, Katsuha-Alpecin et Lotto Soudal....]]>
             </description>
             <enclosure url="http://ds.static.rtbf.be/article/image/770x433/a/0/7/654ed85191dcfd746503f21c0ad1ef3d-1536839411.jpg"  length="1"  type="image/jpg"  />
-            <author>Belga News</author>
+            <author></author>
             <guid>https://www.rtbf.be/sport/cyclisme/detail_suivez-le-championnat-des-flandres-en-direct-video-live-15h30?id=10018155</guid>
         </item>
         <item>
