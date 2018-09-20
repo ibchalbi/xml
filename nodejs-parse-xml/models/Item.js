@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-const Company = require("./Channel");
+const Channel = require("./Channel");
 require("mongoose-type-url");
 
 var itemSchema = new Schema({
@@ -17,7 +17,7 @@ var itemSchema = new Schema({
   author: String,
   guid: String,
   channel: { type: Schema.Types.ObjectId, ref: "Channel" },
-  valid: {type:Boolean,default:true,required:true},
+  valid: { type: Boolean, default: true, required: true },
   errorsMsg: [
     {
       code: Number,
@@ -25,10 +25,10 @@ var itemSchema = new Schema({
     }
   ],
   summary: String,
-  keywords:String,
-  explicit:String,
-  image:String,
-  duration:String
+  keywords: String,
+  explicit: Boolean,
+  image: String,
+  duration: String
 });
 
 module.exports = mongoose.model("Item", itemSchema);

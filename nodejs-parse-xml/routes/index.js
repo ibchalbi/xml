@@ -24,10 +24,9 @@ router.get("/", function(req, res, next) {
         } else {
           if (verify.verifyChannel(result)) {
             var channel = result["rss"]["channel"];
+            channel.valid = true;
             xmlchannel = verify.verifyAndCreateChannel(channel);
             if (verify.verifyItemExsist(channel)) {
-              
-
               channel[0].item.forEach(it => {
                 xmlitems = verify.verifyAndCreateItem(it);
 
@@ -44,7 +43,7 @@ router.get("/", function(req, res, next) {
             } else {
               xmlchannel.valid = false;
               errorsMsg = {
-                code: "32",
+                code: "100",
                 msg: "Channel does not have any item"
               };
               xmlchannel.errorsMsg.push(errorsMsg);
@@ -53,7 +52,7 @@ router.get("/", function(req, res, next) {
             xmlchannel = new Channel();
             xmlchannel.valid = false;
             errorsMsg = {
-              code: "31",
+              code: "10",
               msg: "Channel does not exsist"
             };
             xmlchannel.errorsMsg.push(errorsMsg);
