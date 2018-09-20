@@ -189,7 +189,6 @@ module.exports.verifyAndCreateItem = function(it) {
       code: "24",
       msg: "the item does not have a guid"
     });
-    item.valid = false;
   } else {
     item.guid = it.guid[0];
   }
@@ -238,7 +237,6 @@ module.exports.verifyAndCreateItem = function(it) {
       code: "277",
       msg: "the item does not specify subtitle"
     });
-    item.valid = false;
   } else {
     item.subtitle = it.subtitle[0];
   }
@@ -362,7 +360,6 @@ module.exports.verifyAndCreateChannel = function(ch, callback) {
       code: "17",
       msg: "the channel does not specify the subtitle"
     });
-    channel.valid = false;
   } else {
     channel.subtitle = ch[0].subtitle;
   }
