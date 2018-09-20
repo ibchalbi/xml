@@ -24,6 +24,7 @@ var itemSchema = new Schema({
       msg: String
     }
   ],
+  subtitle: String,
   summary: String,
   keywords: String,
   explicit: Boolean,

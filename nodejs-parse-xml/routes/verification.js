@@ -117,9 +117,32 @@ module.exports.verifEnclosure = function(enclosure) {
   }
 };
 
+// remove itunes if exsists
+module.exports.removeItunes = function(it) {
+  var keys = Object.keys(it);
+  for (var i = 0; i < keys.length; i++) {
+    var s = keys[i].split(":");
+
+    if (s.length > 1) {
+      var newkey = s[s.length - 1];
+      var deletedkey = keys[i];
+
+      Object.defineProperty(
+        it,
+        newkey,
+        Object.getOwnPropertyDescriptor(it, deletedkey)
+      );
+      delete it[deletedkey];
+    }
+  }
+  return it;
+};
 // verify and create the item
 module.exports.verifyAndCreateItem = function(it) {
   item = new Item();
+
+  it = this.removeItunes(it);
+
   if (this.isEmpty(it.title)) {
     item.title = "";
     item.errorsMsg.push({
@@ -199,6 +222,26 @@ module.exports.verifyAndCreateItem = function(it) {
   } else {
     item.explicit = it.explicit[0];
   }
+  if (this.isEmpty(it.category)) {
+    item.category = "";
+    item.errorsMsg.push({
+      code: "2440",
+      msg: "the item does not have a category"
+    });
+    item.valid = false;
+  } else {
+    item.category = it.category[0];
+  }
+  if (this.isEmpty(it.subtitle)) {
+    item.subtitle = "";
+    item.errorsMsg.push({
+      code: "277",
+      msg: "the item does not specify subtitle"
+    });
+    item.valid = false;
+  } else {
+    item.subtitle = it.subtitle[0];
+  }
   if (this.isEmpty(it.image)) {
     item.image = "";
     item.errorsMsg.push({
@@ -250,6 +293,8 @@ module.exports.verifyAndCreateItem = function(it) {
 // verify elements of channel and create it
 module.exports.verifyAndCreateChannel = function(ch, callback) {
   channel = new Channel();
+  
+  ch[0]=this.removeItunes(ch[0]);
   if (this.isEmpty(ch[0].title)) {
     channel.title = "";
     channel.errorsMsg.push({
